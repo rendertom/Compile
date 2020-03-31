@@ -23,7 +23,7 @@ The class requires either  [ExtendScript Toolkit](https://www.adobe.com/products
 // Compile using ExtendScript Toolkit application:
 Compile.estk(
   'test.js',      // Array of File or Folder objects to be compiled. Required.
-  'test.jsxbin',  // A File or Folder object save compiled file to. Optional.
+  'test.jsxbin',  // A File or Folder object to save compiled file into. Optional.
 
   // Optional object with user defined parameters:
   {
@@ -42,7 +42,7 @@ Compile.estk(
 // Compile using ExtendScript Debugger extension for VSCode:
 Compile.vscode(
   'test.js',      // Array of File or Folder objects to be compiled. Required.
-  'test.jsxbin',  // A File or Folder object save compiled file to. Optional.
+  'test.jsxbin',  // A File or Folder object to save compiled file into. Optional.
 
   // Optional object with user defined parameters:
   {

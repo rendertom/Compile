@@ -56,10 +56,10 @@ var CompileUI = (function(thisObj) {
 
 		var vscode = buildCompilerSelector(grpCompiler, 'VSCode');
 		vscode.radio.helpTip = 'Compile using VSCode and extension "ExtendScript Debugger"';
-		vscode.etPath.helpTip = 'Path to "exportToJSX.js" file\rin VSCode\'s extension "ExtendScript Debugger"';
-		vscode.etPath.text = Compile.getExportToJSXPath();
+		vscode.etPath.helpTip = 'Path to "exportToJSXBin.js" file\rin VSCode\'s extension "ExtendScript Debugger"';
+		vscode.etPath.text = Compile.getExportToJSXBinPath();
 		vscode.btnSearch.onClick = function() {
-			var file = FileEx.selectFiles('js', false, 'Please select exportToJSX.js file');
+			var file = FileEx.selectFiles('js', false, 'Please select exportToJSXBin.js file');
 			if (file) {
 				vscode.etPath.text = file.fsName;
 			}
@@ -161,7 +161,7 @@ var CompileUI = (function(thisObj) {
 					options.estk = validateESTKPath(estk);
 				} else {
 					compiler = Compile.vscode;
-					options.exportToJSX = validateVSCodePath(vscode);
+					options.exportToJSXBin = validateVSCodePath(vscode);
 					if (vscode.cbNodePath.value) {
 						options.node = vscode.etNodePath.text;
 					}
@@ -311,8 +311,8 @@ var CompileUI = (function(thisObj) {
 			'	3. Node 10.11.0 or newer:\n' +
 			'	https://nodejs.org/en/download/\n' +
 			'\n' +
-			'Once all installed, select "exportToJSX.js" file in the UI for VSCode: ' +
-			'~/.vscode/extensions/adobe.extendscript-debug-1.1.2/public-scripts/exportToJSX.js\n\n' +
+			'Once all installed, select "exportToJSXBin.js" file in the UI for VSCode: ' +
+			'~/.vscode/extensions/adobe.extendscript-debug-2.0.3/public-scripts/exportToJSXBin.js\n\n' +
 			'If Node is installed in custom path, then define it in "Custom Node path", otherwise it defaults to "/usr/local/bin/node"\n' +
 			'\n' +
 			'-------------------------\n' +
@@ -358,9 +358,9 @@ var CompileUI = (function(thisObj) {
 		}
 
 		fileName = FileEx.getBaseName(path);
-		if (!fileName.match(/exportToJSX/i)) {
+		if (!fileName.match(/exportToJSXBin/i)) {
 			vscode.etPath.active = true;
-			throw 'Not a valid VSCode path. Please select "exportToJSX.js" file';
+			throw 'Not a valid VSCode path. Please select "exportToJSXBin.js" file';
 		}
 
 		return path;

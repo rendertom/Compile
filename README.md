@@ -49,8 +49,8 @@ Compile.vscode(
     extension: '.jsxbin',   // A custom extension. Optional. If not defined, uses .jsxbin.
     removeSource: false,    // An option to remove source files. Optional.
 
-    // A path to 'exportToJSX.js' file, residing in ExtendScript Debugger extension. Optional.
-    exportToJSX: '~/.vscode/extensions/adobe.extendscript-debug-1.1.2/public-scripts/exportToJSX.js',
+    // A path to 'exportToJSXBin.js' file, residing in ExtendScript Debugger extension. Optional.
+    exportToJSXBin: '~/.vscode/extensions/adobe.extendscript-debug-2.0.3/public-scripts/exportToJSXBin.js',
 
     // A path to node. Optional, if not defined, uses '/usr/local/bin/node'.
     node: '/usr/local/bin/node',

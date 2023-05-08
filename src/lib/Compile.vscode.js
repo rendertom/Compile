@@ -2,7 +2,7 @@
 	var options, vscodeOptions;
 
 	vscodeOptions = {
-		exportToJSX: '~/.vscode/extensions/adobe.extendscript-debug-1.1.2/public-scripts/exportToJSX.js',
+		exportToJSXBin: '~/.vscode/extensions/adobe.extendscript-debug-2.0.3/public-scripts/exportToJSXBin.js',
 		extension: '.jsxbin',
 		node: '/usr/local/bin/node',
 		removeSource: false,
@@ -13,7 +13,7 @@
 	 * @param  {String[]|File[]}	scriptPaths - array of File or Folder objects to be compiled. Required.
 	 * @param  {String}				[outputPath = source.jsxbin] - a File or Folder object save compiled file to. Optional.
 	 * @param  {Object}				[userOptions] - object with user parameters.
-	 * @param  {String}				[userOptions.exportToJSX = '~/.vscode/extensions/adobe.extendscript-debug-1.1.2/public-scripts/exportToJSX.js']	- a path to 'exportToJSX.js' file, residing in ExtendScript Debugger extension. Optional.
+	 * @param  {String}				[userOptions.exportToJSXBin = '~/.vscode/extensions/adobe.extendscript-debug-2.0.3/public-scripts/exportToJSXBin.js']	- a path to 'exportToJSXBin.js' file, residing in ExtendScript Debugger extension. Optional.
 	 * @param  {String}				[userOptions.extension = '.jsxbin'] - a custom extension. Optional. If not defined, uses ".jsxbin".
 	 * @param  {String}				[userOptions.node = '/usr/local/bin/node'] - a path to node. Optional, if not defined, uses '/usr/local/bin/node'.
 	 * @param  {Boolean}			[userOptions.removeSource = false] - an option to remove source files. Optional.
@@ -22,9 +22,9 @@
 		options = ObjectEx.assign({}, [vscodeOptions, userOptions]);
 		options.outputPath = outputPath;
 
-		var exportToJSX = FileEx.getFileObject(options.exportToJSX);
-		if (!exportToJSX.exists) {
-			throw 'Could not find "exportToJSX.js"\nFile does not exist at path ' + exportToJSX.fsName;
+		var exportToJSXBin = FileEx.getFileObject(options.exportToJSXBin);
+		if (!exportToJSXBin.exists) {
+			throw 'Could not find "exportToJSXBin.js"\nFile does not exist at path ' + exportToJSXBin.fsName;
 		}
 
 		var node = FileEx.getFileObject(options.node);
@@ -36,7 +36,7 @@
 		var outputPaths = ArrayEx.map(scriptPaths, function(scriptPath) {
 			var cmd, res;
 
-			cmd = getVSCODECommand(options.exportToJSX, scriptPath);
+			cmd = getVSCODECommand(options.exportToJSXBin, scriptPath);
 			res = system.callSystem(cmd);
 
 			if (/Error/i.test(res)) {
@@ -49,8 +49,8 @@
 		return ArrayEx.flat(outputPaths);
 	};
 
-	module.getExportToJSXPath = function() {
-		return vscodeOptions.exportToJSX;
+	module.getExportToJSXBinPath = function() {
+		return vscodeOptions.exportToJSXBin;
 	};
 
 
@@ -79,12 +79,12 @@
 		return outputFile;
 	}
 
-	function getVSCODECommand(exportToJSX, scriptFile) {
-		exportToJSX = FileEx.getFileObject(exportToJSX);
+	function getVSCODECommand(exportToJSXBin, scriptFile) {
+		exportToJSXBin = FileEx.getFileObject(exportToJSXBin);
 		scriptFile = FileEx.getFileObject(scriptFile);
 
 		return options.node + ' "' +
-			exportToJSX.fsName + '" -f -n "' +
+			exportToJSXBin.fsName + '" -f -n "' +
 			scriptFile.fsName + '"';
 	}
 
